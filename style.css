@@ -1197,6 +1197,28 @@ footer {
   color: rgba(255,255,255,0.5);
 }
 
+/* Footer Heart Animation */
+.heart {
+  display: inline-block;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.1); }
+  50% { transform: scale(1); }
+}
+
+.social-link {
+  font-size: 18px;
+  opacity: 1;
+  transition: transform 0.2s ease;
+}
+
+.social-link:hover {
+  transform: scale(1.2);
+}
+
 /* ==========================================================================
    RESPONSIVE
    ========================================================================== */
