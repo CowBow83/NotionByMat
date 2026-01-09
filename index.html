@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO -->
+    <title>NotionbyMat.</title>
+    <meta name="description" content="Découvrez mes templates Notion simples et puissants. Gratuits et payants. Téléchargement immédiat.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- jQuery for header/footer -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Hero -->
+    <header class="hero">
+        <h1 data-i18n="hero.title">Notion Templates Simple & Powerful</h1>
+        <p class="hero-subtitle" data-i18n="hero.subtitle">Simple, efficient and ready-to-use templates</p>
+        <div class="hero-cta">
+            <a href="templates.html" class="btn btn-primary" data-i18n="hero.cta1">Shop Templates</a>
+        </div>
+    </header>
+
+    <!-- Best Sellers Section -->
+    <section class="templates">
+        <div class="section-header">
+            <h2 data-i18n="section.bestsellers">Best Selling Templates</h2>
+            <p data-i18n="section.bestsellers.sub">Our most popular tools</p>
+        </div>
+        <div class="templates-grid" id="bestsellersGrid"></div>
+    </section>
+
+    <!-- Popular Free Section -->
+    <section class="templates" style="background: var(--color-bg);">
+        <div class="section-header">
+            <h2 data-i18n="section.free">Popular Free Templates</h2>
+            <p data-i18n="section.free.sub">Start for free</p>
+        </div>
+        <div class="templates-grid" id="freeGrid"></div>
+    </section>
+
+    <!-- Included Section -->
+    <section class="included-features">
+        <div class="section-header">
+            <h2 data-i18n="included.title">Included in all templates</h2>
+        </div>
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon">📄</div>
+                <h3 data-i18n="included.instructions">Instructions</h3>
+                <p data-i18n="included.instructions.desc">Step-by-step guide</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🎥</div>
+                <h3 data-i18n="included.video">Video Tutorial*</h3>
+                <p data-i18n="included.video.desc">Only for paid templates</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">⏰</div>
+                <h3 data-i18n="included.updates">Lifetime Updates</h3>
+                <p data-i18n="included.updates.desc">Get all improvements</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">💛</div>
+                <h3 data-i18n="included.support">Dedicated Support</h3>
+                <p data-i18n="included.support.desc">We help you via email</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section">
+        <div class="section-header">
+            <h2>Trusted by Creators</h2>
+            <p>What they say about NotionbyMat</p>
+        </div>
+        <div class="reviews-grid" id="reviewsGrid"></div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Scripts -->
+    <script src="translations.js"></script>
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#header").load("header.html");
+            $("#footer").load("footer.html");
+        });
+    </script>
+</body>
+</html>
