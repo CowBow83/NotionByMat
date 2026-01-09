@@ -1,58 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO -->
-    <title>Tous les Templates - NotionbyMat</title>
-    <meta name="description" content="Catalogue complet de templates Notion. Filtrez par catégorie : productivité, business, finance, gratuits...">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png">
-    
-    <!-- Styles -->
-    <link rel="stylesheet" href="style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Templates - NotionbyMat</title>
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+  <!-- HEADER UNIFIÉ -->
+  <nav>
+    <a href="index.html" class="logo">
+      <img src="images/logo.svg" alt="NotionbyMat Logo">
+      <span>NotionbyMat.</span>
+    </a>
 
-    <!-- Header -->
-    <div id="header"></div>
+    <ul class="nav-center">
+      <li><a href="index.html" data-i18n="nav.home">Accueil</a></li>
+      <li><a href="templates.html" class="active-page" data-i18n="nav.templates">Templates</a></li>
+      <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
+    </ul>
 
-    <div class="section-header" style="margin-top: 60px;">
-        <h2 data-i18n="templates.title">All Templates</h2>
-        <p data-i18n="templates.subtitle">Find the perfect tool</p>
+    <div class="nav-right">
+      <div class="lang-switcher" aria-label="Language switcher">
+        <button class="lang-btn active" data-lang="en" type="button">EN</button>
+        <button class="lang-btn" data-lang="fr" type="button">FR</button>
+      </div>
     </div>
+  </nav>
 
-    <div class="templates">
-        <!-- Filters -->
-        <div class="filter-buttons">
-            <button class="filter-btn active" data-filter="all" data-i18n="filter.all">All</button>
-            <button class="filter-btn" data-filter="free" data-i18n="filter.free">Free</button>
-            <button class="filter-btn" data-filter="productivity" data-i18n="filter.productivity">Productivity</button>
-            <button class="filter-btn" data-filter="business" data-i18n="filter.business">Business</button>
-            <button class="filter-btn" data-filter="creative" data-i18n="filter.creative">Creative</button>
-            <button class="filter-btn" data-filter="finance" data-i18n="filter.finance">Finance</button>
-            <button class="filter-btn" data-filter="personal" data-i18n="filter.personal">Personal</button>
+  <main>
+    <header class="page-header">
+      <h1 data-i18n="templates.title">All Templates</h1>
+      <p data-i18n="templates.subtitle">Simple, efficient and ready-to-use templates</p>
+    </header>
+
+    <section class="templates">
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all" type="button" data-i18n="filter.all">All</button>
+        <button class="filter-btn" data-filter="free" type="button" data-i18n="filter.free">Free</button>
+        <button class="filter-btn" data-filter="productivity" type="button" data-i18n="filter.productivity">Productivity</button>
+        <button class="filter-btn" data-filter="business" type="button" data-i18n="filter.business">Business</button>
+        <button class="filter-btn" data-filter="finance" type="button" data-i18n="filter.finance">Finance</button>
+      </div>
+
+      <div class="templates-grid" id="templatesGrid"></div>
+    </section>
+  </main>
+
+  <!-- FOOTER UNIFIÉ -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3 data-i18n="footer.product">Product</h3>
+        <a href="templates.html" data-i18n="footer.templates">Templates</a>
+        <a href="blog.html" data-i18n="footer.blog">Blog</a>
+      </div>
+      <div class="footer-section">
+        <h3 data-i18n="footer.contact">Contact</h3>
+        <p>hello@notionbymat.com</p>
+        <div class="footer-socials" style="margin-top: 16px; display: flex; gap: 12px;">
+          <a href="#" style="opacity: 1; font-size: 18px;">𝕏</a>
+          <a href="#" style="opacity: 1; font-size: 18px;">In</a>
         </div>
-
-        <!-- Grid -->
-        <div class="templates-grid" id="templatesGrid"></div>
+      </div>
     </div>
+    <div class="footer-bottom">
+      <p data-i18n="footer.rights">© 2026 NotionbyMat. All rights reserved.</p>
+    </div>
+  </footer>
 
-    <!-- Footer -->
-    <div id="footer"></div>
-
-    <!-- Scripts -->
-    <script src="translations.js"></script>
-    <script src="data.js"></script>
-    <script src="script.js"></script>
-    <script>
-        $(document).ready(function() {
-            $("#header").load("header.html");
-            $("#footer").load("footer.html");
-        });
-    </script>
+  <!-- Scripts -->
+  <script src="translations.js"></script>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

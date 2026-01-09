@@ -1,104 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO -->
-    <title>NotionbyMat.</title>
-    <meta name="description" content="Découvrez mes templates Notion simples et puissants. Gratuits et payants. Téléchargement immédiat.">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png">
-    
-    <!-- Styles -->
-    <link rel="stylesheet" href="style.css">
-    
-    <!-- jQuery for header/footer -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NotionbyMat - Notion Templates Simple & Powerful</title>
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+  <!-- HEADER UNIFIÉ -->
+  <nav>
+    <a href="index.html" class="logo">
+      <img src="images/logo.svg" alt="NotionbyMat Logo">
+      <span>NotionbyMat.</span>
+    </a>
 
-    <!-- Header -->
-    <div id="header"></div>
+    <ul class="nav-center">
+      <li><a href="index.html" class="active-page" data-i18n="nav.home">Accueil</a></li>
+      <li><a href="templates.html" data-i18n="nav.templates">Templates</a></li>
+      <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
+    </ul>
 
-    <!-- Hero -->
-    <header class="hero">
-        <h1 data-i18n="hero.title">Notion Templates Simple & Powerful</h1>
+    <div class="nav-right">
+      <div class="lang-switcher" aria-label="Language switcher">
+        <button class="lang-btn active" data-lang="en" type="button">EN</button>
+        <button class="lang-btn" data-lang="fr" type="button">FR</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO WRAPPER -->
+    <div class="hero-wrapper">
+      <header class="hero">
+        <h1 data-i18n="hero.title">Notion Templates Simple &amp; Powerful</h1>
         <p class="hero-subtitle" data-i18n="hero.subtitle">Simple, efficient and ready-to-use templates</p>
+
         <div class="hero-cta">
-            <a href="templates.html" class="btn btn-primary" data-i18n="hero.cta1">Shop Templates</a>
+          <a class="btn btn-primary" href="templates.html" data-i18n="hero.cta.primary">Shop Templates</a>
+          <a class="btn btn-secondary" href="blog.html" data-i18n="hero.cta.secondary">Read the Blog</a>
         </div>
-    </header>
+      </header>
+    </div>
 
-    <!-- Best Sellers Section -->
+    <!-- BEST SELLERS -->
     <section class="templates">
-        <div class="section-header">
-            <h2 data-i18n="section.bestsellers">Best Selling Templates</h2>
-            <p data-i18n="section.bestsellers.sub">Our most popular tools</p>
-        </div>
-        <div class="templates-grid" id="bestsellersGrid"></div>
+      <div class="section-header">
+        <h2 data-i18n="section.bestsellers">Best Sellers</h2>
+        <p data-i18n="section.bestsellers.subtitle">Our most popular templates</p>
+      </div>
+
+      <div class="templates-grid" id="bestsellersGrid"></div>
     </section>
 
-    <!-- Popular Free Section -->
-    <section class="templates" style="background: var(--color-bg);">
-        <div class="section-header">
-            <h2 data-i18n="section.free">Popular Free Templates</h2>
-            <p data-i18n="section.free.sub">Start for free</p>
-        </div>
-        <div class="templates-grid" id="freeGrid"></div>
+    <!-- FREE TEMPLATES -->
+    <section class="templates">
+      <div class="section-header">
+        <h2 data-i18n="section.free">Free Templates</h2>
+        <p data-i18n="section.free.subtitle">Start for free</p>
+      </div>
+
+      <div class="templates-grid" id="freeGrid"></div>
+
+      <div class="center-actions" style="text-align: center; margin-top: 40px;">
+        <a class="btn btn-secondary" href="templates.html" data-i18n="common.learnMore">View All Templates</a>
+      </div>
     </section>
+  </main>
 
-    <!-- Included Section -->
-    <section class="included-features">
-        <div class="section-header">
-            <h2 data-i18n="included.title">Included in all templates</h2>
+  <!-- FOOTER UNIFIÉ -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3 data-i18n="footer.product">Product</h3>
+        <a href="templates.html" data-i18n="footer.templates">Templates</a>
+        <a href="blog.html" data-i18n="footer.blog">Blog</a>
+      </div>
+      <div class="footer-section">
+        <h3 data-i18n="footer.contact">Contact</h3>
+        <p>hello@notionbymat.com</p>
+        <div class="footer-socials" style="margin-top: 16px; display: flex; gap: 12px;">
+          <a href="#" style="opacity: 1; font-size: 18px;">𝕏</a>
+          <a href="#" style="opacity: 1; font-size: 18px;">In</a>
         </div>
-        <div class="features-grid">
-            <div class="feature-item">
-                <div class="feature-icon">📄</div>
-                <h3 data-i18n="included.instructions">Instructions</h3>
-                <p data-i18n="included.instructions.desc">Step-by-step guide</p>
-            </div>
-            <div class="feature-item">
-                <div class="feature-icon">🎥</div>
-                <h3 data-i18n="included.video">Video Tutorial*</h3>
-                <p data-i18n="included.video.desc">Only for paid templates</p>
-            </div>
-            <div class="feature-item">
-                <div class="feature-icon">⏰</div>
-                <h3 data-i18n="included.updates">Lifetime Updates</h3>
-                <p data-i18n="included.updates.desc">Get all improvements</p>
-            </div>
-            <div class="feature-item">
-                <div class="feature-icon">💛</div>
-                <h3 data-i18n="included.support">Dedicated Support</h3>
-                <p data-i18n="included.support.desc">We help you via email</p>
-            </div>
-        </div>
-    </section>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-i18n="footer.rights">© 2026 NotionbyMat. All rights reserved.</p>
+    </div>
+  </footer>
 
-    <!-- Reviews Section -->
-    <section class="reviews-section">
-        <div class="section-header">
-            <h2>Trusted by Creators</h2>
-            <p>What they say about NotionbyMat</p>
-        </div>
-        <div class="reviews-grid" id="reviewsGrid"></div>
-    </section>
-
-    <!-- Footer -->
-    <div id="footer"></div>
-
-    <!-- Scripts -->
-    <script src="translations.js"></script>
-    <script src="data.js"></script>
-    <script src="script.js"></script>
-    <script>
-        $(document).ready(function() {
-            $("#header").load("header.html");
-            $("#footer").load("footer.html");
-        });
-    </script>
+  <!-- Scripts -->
+  <script src="translations.js"></script>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
