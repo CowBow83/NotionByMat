@@ -27,7 +27,6 @@ const templatesData = [
       "images/templates/freelance/2.png",
       "images/templates/freelance/3.png",
       "images/templates/freelance/4.png",
-      "images/templates/freelance/5.png",
     ],
     emoji: "🚀",
 
@@ -37,7 +36,7 @@ const templatesData = [
     pricePro: 29,
     promoPrice: 19, // Si présent => prix barré + promo
 
-    soldCount: 127,
+    soldCount: 533,
     rating: 4.9,
 
     useCases: ["Freelances", "Agences", "Consultants"],

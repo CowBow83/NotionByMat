@@ -1,9 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
   <title>NotionbyMat - Notion Templates Simple & Powerful</title>
+  <meta name="description"
+    content="Discover simple, efficient and ready-to-use Notion templates for freelancers, businesses, and creatives. Free and Premium templates available.">
+  <meta name="keywords" content="Notion templates, productivity, freelance, business, CRM, project management">
+  <meta name="author" content="NotionbyMat">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://notionbymat.com/">
+  <meta property="og:title" content="NotionbyMat - Notion Templates Simple & Powerful">
+  <meta property="og:description"
+    content="Discover simple, efficient and ready-to-use Notion templates for freelancers, businesses, and creatives.">
+  <meta property="og:image" content="https://notionbymat.com/images/og-image.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://notionbymat.com/">
+  <meta property="twitter:title" content="NotionbyMat - Notion Templates Simple & Powerful">
+  <meta property="twitter:description"
+    content="Discover simple, efficient and ready-to-use Notion templates for freelancers, businesses, and creatives.">
+  <meta property="twitter:image" content="https://notionbymat.com/images/og-image.png">
+
   <link rel="icon" type="image/svg+xml" href="images/logo.svg">
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -44,6 +68,21 @@
       </header>
     </div>
 
+    <!-- FEATURED QUOTE SECTION -->
+    <section class="featured-quote-section" id="quoteSection">
+      <div class="quote-container">
+        <div class="quote-icon">❝</div>
+        <p class="quote-text" id="quoteText" data-i18n-html="true"></p>
+        <div class="quote-author">
+          <div class="quote-avatar" id="quoteAvatar"></div>
+          <div class="quote-info">
+            <span class="quote-name" id="quoteName"></span>
+            <span class="quote-role" id="quoteRole"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- BEST SELLERS -->
     <section class="templates">
       <div class="section-header">
@@ -69,31 +108,48 @@
     </section>
   </main>
 
+
+
+  <!-- CHAT WALL SECTION -->
+  <section class="chat-wall-section">
+    <div class="section-header">
+      <h2 data-i18n="testimonials.title">Loved by the community</h2>
+      <p data-i18n="testimonials.subtitle">Join 500+ creators using our templates</p>
+    </div>
+    <div class="chat-wall-grid" id="chatWallGrid">
+      <!-- Chat bubbles injected by JS -->
+    </div>
+  </section>
+
   <!-- FOOTER UNIFIÉ -->
   <footer>
-  <div class="footer-content">
-    <div class="footer-section">
-      <h3 data-i18n="footer.product">Product</h3>
-      <a href="templates.html" data-i18n="footer.templates">Templates</a>
-      <a href="blog.html" data-i18n="footer.blog">Blog</a>
-    </div>
-    <div class="footer-section">
-      <h3 data-i18n="footer.contact">Contact</h3>
-      <p>hello@notionbymat.com</p>
-      <div class="footer-socials">
-        <a href="#" class="social-link">𝕏</a>
-        <a href="#" class="social-link">In</a>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3 data-i18n="footer.product">Product</h3>
+        <a href="templates.html" data-i18n="footer.templates">Templates</a>
+        <a href="blog.html" data-i18n="footer.blog">Blog</a>
+      </div>
+      <div class="footer-section">
+        <h3 data-i18n="footer.contact">Contact</h3>
+        <p>notionbymat@gmail.com</p>
+        <div class="footer-socials">
+          <a href="#" class="social-link">𝕏</a>
+          <a href="#" class="social-link">In</a>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="footer-bottom">
-    <p>Made with <span class="heart">🤍</span> by Mat &nbsp;|&nbsp; <span data-i18n="footer.rights">© 2026 NotionbyMat. All rights reserved.</span></p>
-  </div>
-</footer>
+    <div class="footer-bottom">
+      <p>Made with <span class="heart">🤍</span> by Mat &nbsp;|&nbsp; <span data-i18n="footer.rights">© 2026
+          NotionbyMat. All rights reserved.</span></p>
+    </div>
+  </footer>
 
   <!-- Scripts -->
   <script src="translations.js"></script>
   <script src="data.js"></script>
+  <script src="blogData.js"></script>
+  <script src="testimonialsData.js"></script>
   <script src="script.js"></script>
 </body>
+
 </html>

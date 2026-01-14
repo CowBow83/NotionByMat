@@ -66,6 +66,9 @@ const translations = {
 
     // UTILITIES
     "common.learnMore": "View All Templates",
+    "blog.readMore": "Read more →",
+    "testimonials.title": "Loved by the community",
+    "testimonials.subtitle": "Join 500+ creators using our templates",
   },
 
   fr: {
@@ -135,5 +138,8 @@ const translations = {
 
     // UTILITIES
     "common.learnMore": "Voir tous les Templates",
+    "blog.readMore": "Lire la suite →",
+    "testimonials.title": "Aimé par la communauté",
+    "testimonials.subtitle": "Rejoignez 500+ créateurs qui utilisent nos templates",
   },
 };

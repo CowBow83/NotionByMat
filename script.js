@@ -18,6 +18,11 @@ function initLanguage() {
   const saved = localStorage.getItem("notionbymat-lang");
   if (saved === "fr" || saved === "en") currentLanguage = saved;
   syncLanguageButtons();
+  updateHtmlLang();
+}
+
+function updateHtmlLang() {
+  document.documentElement.lang = currentLanguage;
 }
 
 function translate(key) {
@@ -60,8 +65,12 @@ function bindLanguageSwitcher() {
       localStorage.setItem("notionbymat-lang", currentLanguage);
 
       syncLanguageButtons();
+      updateHtmlLang();
       updateTranslations();
       renderAllTemplateZones();
+      renderBlog();
+      initFeaturedQuote(); // Refresh quote text
+      renderChatWall();    // Refresh chat bubbles
 
       // Si la modal est ouverte: refresh
       const modal = document.getElementById("productModal");
@@ -126,9 +135,15 @@ function renderHomeBestsellers() {
   if (!grid) return;
 
   grid.innerHTML = "";
-  (window.templatesData || [])
-    .filter((t) => t.isBestSeller)
-    .forEach((t) => grid.appendChild(renderTemplateCard(t)));
+
+  try {
+    const templates = window.templatesData || [];
+    templates
+      .filter((t) => t && t.isBestSeller)
+      .forEach((t) => grid.appendChild(renderTemplateCard(t)));
+  } catch (error) {
+    console.error("Error rendering bestsellers:", error);
+  }
 }
 
 function renderHomeFree() {
@@ -136,9 +151,15 @@ function renderHomeFree() {
   if (!grid) return;
 
   grid.innerHTML = "";
-  (window.templatesData || [])
-    .filter((t) => Number(t.price || 0) === 0)
-    .forEach((t) => grid.appendChild(renderTemplateCard(t)));
+
+  try {
+    const templates = window.templatesData || [];
+    templates
+      .filter((t) => t && Number(t.price || 0) === 0)
+      .forEach((t) => grid.appendChild(renderTemplateCard(t)));
+  } catch (error) {
+    console.error("Error rendering free templates:", error);
+  }
 }
 
 function renderTemplatesPageGrid() {
@@ -214,22 +235,21 @@ function openTemplateModal(template) {
         <div class="modal-slider">
           <div class="slider-container">
             <img src="${galleryImages[0]}" alt="${escapeHTML(template.title)}" id="sliderImage" class="slider-image">
-            ${
-              galleryImages.length > 1
-                ? `
+            ${galleryImages.length > 1
+        ? `
                 <button class="slider-arrow slider-prev" type="button" onclick="changeSlide(-1)">‹</button>
                 <button class="slider-arrow slider-next" type="button" onclick="changeSlide(1)">›</button>
                 <div class="slider-dots" id="sliderDots">
                   ${galleryImages
-                    .map(
-                      (_, i) =>
-                        `<button type="button" class="dot ${i === 0 ? "active" : ""}" aria-label="Go to slide ${i + 1}" onclick="goToSlide(${i})"></button>`
-                    )
-                    .join("")}
+          .map(
+            (_, i) =>
+              `<button type="button" class="dot ${i === 0 ? "active" : ""}" aria-label="Go to slide ${i + 1}" onclick="goToSlide(${i})"></button>`
+          )
+          .join("")}
                 </div>
               `
-                : ""
-            }
+        : ""
+      }
           </div>
         </div>
       `
@@ -345,9 +365,9 @@ function openTemplateModal(template) {
     <div class="modal-content">
       <button class="modal-close" type="button" onclick="closeModal()">×</button>
 
-      <div class="modal-lang-switcher" style="position: absolute; top: 20px; left: 20px; z-index: 21; display: flex; gap: 4px;">
-        <button class="lang-btn ${currentLanguage === "en" ? "active" : ""}" type="button" onclick="switchModalLanguage('en', ${template.id})" style="padding: 6px 12px; font-size: 12px;">EN</button>
-        <button class="lang-btn ${currentLanguage === "fr" ? "active" : ""}" type="button" onclick="switchModalLanguage('fr', ${template.id})" style="padding: 6px 12px; font-size: 12px;">FR</button>
+      <div class="modal-lang-switcher">
+        <button class="lang-btn ${currentLanguage === "en" ? "active" : ""}" type="button" onclick="switchModalLanguage('en', ${template.id})">EN</button>
+        <button class="lang-btn ${currentLanguage === "fr" ? "active" : ""}" type="button" onclick="switchModalLanguage('fr', ${template.id})">FR</button>
       </div>
 
       <div class="modal-body scrollable">
@@ -406,6 +426,7 @@ function switchModalLanguage(newLang, templateId) {
   syncLanguageButtons();
   updateTranslations();
   renderAllTemplateZones();
+  renderBlog();
 
   const template = (window.templatesData || []).find((t) => String(t.id) === String(templateId));
   if (template) openTemplateModal(template);
@@ -459,12 +480,14 @@ function normalizeLocalizedArray(value, lang) {
 }
 
 function escapeHTML(str) {
-  return String(str)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return String(str).replace(/[&<>"']/g, (m) => map[m]);
 }
 
 /* -----------------------------
@@ -472,6 +495,7 @@ function escapeHTML(str) {
 ----------------------------- */
 document.addEventListener("DOMContentLoaded", () => {
   window.templatesData = window.templatesData || templatesData;
+  window.blogData = window.blogData || blogData;
 
   initLanguage();
   bindLanguageSwitcher();
@@ -479,10 +503,61 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateTranslations();
   renderAllTemplateZones();
-  
+  renderBlog();
+
+  // Testimonials
+  initFeaturedQuote();
+  renderChatWall();
+
   // NOUVEAU : Effet slide horizontal dans la nav
   initNavSlider();
 });
+
+/* -----------------------------
+   Blog rendering
+----------------------------- */
+function renderBlog() {
+  const grid = document.getElementById("blogGrid");
+  if (!grid) return;
+
+  const lang = currentLanguage === "fr" ? "fr" : "en";
+
+  // Ne garder que les articles de blog dynamiques, supprimer le contenu statique
+  const staticCards = grid.querySelectorAll('.blog-card');
+  staticCards.forEach(card => card.remove());
+
+  (window.blogData || []).forEach((article) => {
+    const card = document.createElement("div");
+    card.className = "blog-card";
+
+    const title = article.title?.[lang] || article.title?.en || "Untitled";
+    const excerpt = article.excerpt?.[lang] || article.excerpt?.en || "";
+    const link = article.content?.[lang] || article.content?.en || "#";
+
+    const imageHTML = article.image
+      ? `<img src="${article.image}" alt="${escapeHTML(title)}" class="blog-image" loading="lazy">`
+      : `<div class="blog-image"></div>`;
+
+    const formattedDate = new Date(article.date).toLocaleDateString(lang === "fr" ? "fr-FR" : "en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric"
+    });
+
+    card.innerHTML = `
+      ${imageHTML}
+      <div class="blog-content">
+        <span class="blog-date">${escapeHTML(formattedDate)}</span>
+        <h3 class="blog-title">${escapeHTML(title)}</h3>
+        <p class="blog-excerpt">${escapeHTML(excerpt)}</p>
+        <a href="${link}" class="blog-link">${escapeHTML(translate("blog.readMore"))}</a>
+      </div>
+    `;
+
+    grid.appendChild(card);
+  });
+}
+
 
 /* -----------------------------
    Navigation Slider Effect
@@ -493,7 +568,7 @@ function initNavSlider() {
 
   const links = navCenter.querySelectorAll('a');
   const activeLinkIndex = Array.from(links).findIndex(link => link.classList.contains('active-page'));
-  
+
   if (activeLinkIndex !== -1) {
     updateSliderPosition(links, activeLinkIndex);
   }
@@ -526,4 +601,90 @@ function updateSliderPosition(links, index) {
   // Appliquer la transformation
   const before = window.getComputedStyle(navCenter, '::before');
   navCenter.style.setProperty('--slider-transform', `translateX(${offsetLeft - 6}px)`);
+}
+
+/* -----------------------------
+   Testimonials: Featured Quote (Fade)
+----------------------------- */
+let quoteInterval;
+
+function initFeaturedQuote() {
+  const quoteText = document.getElementById("quoteText");
+  const quoteName = document.getElementById("quoteName");
+  const quoteRole = document.getElementById("quoteRole");
+  const quoteAvatar = document.getElementById("quoteAvatar");
+  const container = document.querySelector(".quote-container");
+
+  if (!quoteText || !container) return;
+
+  const testimonials = window.featuredTestimonials || [];
+  if (testimonials.length === 0) return;
+
+  let index = 0;
+
+  function showQuote(i) {
+    const t = testimonials[i];
+    const lang = currentLanguage === "fr" ? "fr" : "en";
+
+    // Fade out
+    container.style.opacity = "0";
+
+    setTimeout(() => {
+      // Update content
+      quoteText.innerHTML = t.text[lang];
+      quoteName.textContent = t.author;
+      quoteRole.textContent = t.role[lang];
+      quoteAvatar.textContent = t.emoji;
+      quoteAvatar.style.backgroundColor = t.avatarColor + "20"; // Light bg
+      quoteAvatar.style.color = t.avatarColor;
+
+      // Fade in
+      container.style.opacity = "1";
+    }, 600);
+  }
+
+  // Initial show
+  showQuote(0);
+
+  // Auto rotate
+  if (quoteInterval) clearInterval(quoteInterval);
+  quoteInterval = setInterval(() => {
+    index = (index + 1) % testimonials.length;
+    showQuote(index);
+  }, 5000);
+}
+
+/* -----------------------------
+   Testimonials: Chat Wall
+----------------------------- */
+function renderChatWall() {
+  const grid = document.getElementById("chatWallGrid");
+  if (!grid) return;
+
+  grid.innerHTML = "";
+  const lang = currentLanguage === "fr" ? "fr" : "en";
+  const testimonials = window.chatTestimonials || [];
+
+  testimonials.forEach((t) => {
+    const bubble = document.createElement("div");
+    bubble.className = "chat-bubble";
+    bubble.onclick = () => openTemplateById(t.templateId);
+
+    bubble.innerHTML = `
+      <div class="chat-avatar" style="background-color: ${t.avatarColor}">${t.emoji}</div>
+      <div class="chat-content">
+        <div class="chat-message">"${t.text[lang]}"</div>
+        <div class="chat-author">${t.author}</div>
+      </div>
+    `;
+
+    grid.appendChild(bubble);
+  });
+}
+
+function openTemplateById(id) {
+  const template = (window.templatesData || []).find(t => t.id === id);
+  if (template) {
+    openTemplateModal(template);
+  }
 }

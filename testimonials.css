@@ -1,0 +1,171 @@
+/* ==========================================================================
+   FEATURED QUOTE SECTION
+   ========================================================================== */
+.featured-quote-section {
+    padding: var(--space-4xl) var(--space-lg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(236, 253, 245, 0.5));
+}
+
+.quote-container {
+    max-width: 800px;
+    text-align: center;
+    position: relative;
+    opacity: 1;
+    transition: opacity 0.6s ease;
+}
+
+.quote-icon {
+    font-family: serif;
+    font-size: 60px;
+    color: var(--color-primary);
+    opacity: 0.2;
+    line-height: 1;
+    margin-bottom: var(--space-md);
+}
+
+.quote-text {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--color-text-main);
+    line-height: 1.6;
+    margin-bottom: var(--space-xl);
+    font-family: 'Plus Jakarta Sans', serif;
+    /* Mix moderne */
+}
+
+.quote-author {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.quote-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--color-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: var(--space-xs);
+}
+
+.quote-name {
+    font-weight: 700;
+    color: var(--color-text-main);
+    font-size: 16px;
+}
+
+.quote-role {
+    font-size: 14px;
+    color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   CHAT WALL SECTION
+   ========================================================================== */
+.chat-wall-section {
+    padding: var(--space-4xl) var(--space-lg);
+    background: var(--color-surface);
+    overflow: hidden;
+}
+
+.chat-wall-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-xl) 0;
+}
+
+.chat-bubble {
+    background: white;
+    border-radius: 20px;
+    padding: var(--space-md) var(--space-lg);
+    box-shadow: var(--shadow-card);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    max-width: 350px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border: 1px solid transparent;
+    position: relative;
+}
+
+.chat-bubble:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--color-primary-light);
+}
+
+.chat-bubble::after {
+    content: '↗';
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 10px;
+    color: var(--color-text-muted);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.chat-bubble:hover::after {
+    opacity: 1;
+}
+
+.chat-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    color: white;
+    font-weight: bold;
+}
+
+.chat-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.chat-message {
+    font-size: 14px;
+    color: var(--color-text-main);
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.chat-author {
+    font-size: 11px;
+    color: var(--color-text-muted);
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .quote-text {
+        font-size: 18px;
+    }
+
+    .chat-wall-grid {
+        gap: var(--space-md);
+    }
+
+    .chat-bubble {
+        width: 100%;
+        max-width: 100%;
+    }
+}
